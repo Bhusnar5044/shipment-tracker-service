@@ -1,9 +1,10 @@
+import { Role } from '@/interfaces/users.interface';
 import { Schema, model, Document } from 'mongoose';
 
 export interface IUser extends Document {
   email: string;
   password: string;
-  role: string;
+  role: Role;
 }
 
 const userSchema = new Schema<IUser>({
