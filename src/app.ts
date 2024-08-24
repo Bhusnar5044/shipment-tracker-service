@@ -53,12 +53,14 @@ class App {
     return this.app;
   }
 
-  private async connectToDatabase() {
+  private connectToDatabase() {
     if (this.env !== 'production') {
       set('debug', true);
     }
 
-    await connect(dbConnection.url);
+   connect(dbConnection.url)
+    .then(()=> console.log("MongoDb Connected"))
+    .catch((err)=> console.log("Mongo Error", err));
   }
 
   private initializeMiddlewares() {
