@@ -5,7 +5,7 @@ import { Routes } from '@/interfaces/routes.interface';
 
 class ShipmentRoute implements Routes {
   public router: Router;
-  public path = '/shipment';
+  public path = '/shipments';
   public shipmentController = new ShipmentController();
 
   constructor() {
@@ -14,13 +14,13 @@ class ShipmentRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.post('/', authMiddleware, authorize(['Manager', 'Admin']), this.shipmentController.createShipment);
-    this.router.get('/', authMiddleware, authorize(['Manager', 'Admin']), this.shipmentController.getShipments);
-    this.router.get('/:id', authMiddleware, authorize(['Manager', 'Admin']), this.shipmentController.getShipmentById);
-    this.router.put('/:id', authMiddleware, authorize(['Manager', 'Admin']), this.shipmentController.updateShipment);
-    this.router.delete('/:id', authMiddleware, authorize(['Manager', 'Admin']), this.shipmentController.deleteShipment);
+    this.router.get(`${this.path}/`, authMiddleware, authorize(['Manager', 'Admin']), this.shipmentController.getShipments);
+    this.router.post(`${this.path}/create`, authMiddleware, authorize(['Manager', 'Admin']), this.shipmentController.createShipment);
+    this.router.get(`${this.path}/:id`, authMiddleware, authorize(['Manager', 'Admin']), this.shipmentController.getShipmentById);
+    this.router.put(`${this.path}/:id`, authMiddleware, authorize(['Manager', 'Admin']), this.shipmentController.updateShipment);
+    this.router.delete(`${this.path}/:id`, authMiddleware, authorize(['Manager', 'Admin']), this.shipmentController.deleteShipment);
     // Track a shipment by tracking ID
-    this.router.get('/track/:trackingId', authMiddleware, this.shipmentController.trackShipment);
+    this.router.get(`${this.path}/track/:trackingId`, authMiddleware, this.shipmentController.trackShipment);
   }
 }
 
