@@ -1,7 +1,5 @@
 import { Router } from 'express';
-import { CreateUserDto } from '@dtos/users.dto';
 import { Routes } from '@interfaces/routes.interface';
-import validationMiddleware from '@middlewares/validation.middleware';
 import CustomerController from '@/controllers/customer.controller';
 
 class CustomerRoute implements Routes {

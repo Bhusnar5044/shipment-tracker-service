@@ -18,6 +18,7 @@ export interface IShipment extends Document {
   isDeleted: boolean;
   createdAt: Date;
   updatedAt: Date;
+  shipmentId: string;
   trackingId: string;
 }
 
@@ -42,6 +43,7 @@ const shipmentSchema = new Schema<IShipment>(
     },
     shippingAgent: { type: String, required: true },
     isDeleted: { type: Boolean, default: false },
+    shipmentId: { type: String, unique: true, required: true },
     trackingId: { type: String, unique: true, required: true },
   },
   { timestamps: true }
