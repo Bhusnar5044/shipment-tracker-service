@@ -1,5 +1,4 @@
 import { hash } from 'bcrypt';
-import { CreateUserDto } from '@dtos/users.dto';
 import { HttpException } from '@exceptions/HttpException';
 import { Customer, ICustomer } from '@models/customer.model';
 import { isEmpty } from '@utils/util';

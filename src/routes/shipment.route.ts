@@ -14,9 +14,9 @@ class ShipmentRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}/`, authMiddleware, authorize(['Manager', 'Admin']), this.shipmentController.getShipments);
+    this.router.get(`${this.path}/`, authMiddleware, authorize(['Manager', 'Admin', 'Customer']), this.shipmentController.getShipments);
     this.router.post(`${this.path}/create`, authMiddleware, authorize(['Manager', 'Admin']), this.shipmentController.createShipment);
-    this.router.get(`${this.path}/:id`, authMiddleware, authorize(['Manager', 'Admin']), this.shipmentController.getShipmentById);
+    this.router.get(`${this.path}/:id`, authMiddleware, authorize(['Manager', 'Admin', 'Customer']), this.shipmentController.getShipmentById);
     this.router.put(`${this.path}/:id`, authMiddleware, authorize(['Manager', 'Admin']), this.shipmentController.updateShipment);
     this.router.delete(`${this.path}/:id`, authMiddleware, authorize(['Manager', 'Admin']), this.shipmentController.deleteShipment);
     // Track a shipment by tracking ID

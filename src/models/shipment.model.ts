@@ -2,7 +2,7 @@ import { Document, Schema, model } from 'mongoose';
 import { ICustomer } from './customer.model';
 
 export interface IShipment extends Document {
-  customer: ICustomer['_id']; // Reference to a customer ID
+  customerId: ICustomer['email']; // Reference to a customer ID
   origin: string;
   destination: string;
   currentStatus: 'Pending' | 'In Transit' | 'Arrived' | 'Delivered' | 'Cancelled';
@@ -24,7 +24,7 @@ export interface IShipment extends Document {
 
 const shipmentSchema = new Schema<IShipment>(
   {
-    customer: { type: Schema.Types.ObjectId, ref: 'Customer', required: true },
+    customerId: { type: String, ref: 'Customer', required: true },
     origin: { type: String, required: true },
     destination: { type: String, required: true },
     currentStatus: {

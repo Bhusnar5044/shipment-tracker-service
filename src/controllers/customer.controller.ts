@@ -1,11 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
-import { CreateUserDto } from '@dtos/users.dto';
 import UserService from '@services/users.service';
 import CustomerService from '@services/customer.service';
 
 import { IUser } from '@/models/user.model';
 import { ICustomer } from '@/models/customer.model';
-import { email } from 'envalid';
 
 class CustomerController {
   public userService = new UserService();
@@ -50,7 +48,7 @@ class CustomerController {
     try {
       const userId: string = req.params.id;
       const userData: Partial<ICustomer> = req.body;
-      const updateUserData: IUser = await this.customerService.updateUser(userId, userData);
+      const updateUserData: ICustomer = await this.customerService.updateUser(userId, userData);
 
       res.status(200).json({ data: updateUserData, message: 'updated' });
     } catch (error) {

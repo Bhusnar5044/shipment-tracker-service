@@ -23,9 +23,9 @@ class ShipmentController {
 
   // Get all shipments
   async getShipments(req: Request, res: Response,  next: NextFunction): Promise<Response> {
-    console.log('getShipments')
+    const customerId = req.params.id;
     try {
-      const shipments = await shipmentService.listShipments(req.body);
+      const shipments = await shipmentService.listShipments(customerId);
 
       return res.status(200).json({data: {
         list: shipments,
@@ -85,7 +85,8 @@ class ShipmentController {
   // Soft delete a shipment
   async deleteShipment(req: Request, res: Response, next: NextFunction): Promise<Response> {
     try {
-      const shipment = await shipmentService.softDeleteShipment(req.params.id);
+      const id = req.params.id;
+      const shipment = await shipmentService.softDeleteShipment(id);
 
       if (!shipment || shipment.isDeleted) {
         return res.status(404).json({ message: 'Shipment not found' });
