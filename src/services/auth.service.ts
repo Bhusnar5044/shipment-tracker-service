@@ -20,7 +20,7 @@ class AuthService {
     const hashedPassword = await hash(userData.password, 10);
     const user: IUser = await this.users.create({ ...userData, password: hashedPassword });
 
-    const tokenData = this.createToken(findUser);
+    const tokenData = this.createToken(user);
     const cookie = this.createCookie(tokenData);
 
     return { cookie, user, tokenData };
@@ -54,7 +54,8 @@ class AuthService {
   }
 
   public createToken(user: IUser): TokenData {
-    const dataStoredInToken: DataStoredInToken = { _id: user._id };
+    console.log({user})
+    const dataStoredInToken: DataStoredInToken = { _id: user.id };
     const secretKey: string = JWT_SECRET;
     const expiresIn: number = 60 * 60;
 
